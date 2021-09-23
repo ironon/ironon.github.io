@@ -8,6 +8,7 @@ my = canvas.height / 2
 const bullets = []
 const enemies = []
 const particles = []
+
 class Projectile {
     constructor(x, y, radius, color, velocity, mult) {
         this.x = x
@@ -126,9 +127,15 @@ function spawnEnemies() {
 }
 let animationId = undefined
 function animate() {
+    
+    
     animationId = requestAnimationFrame(animate)
     ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
+    
+    ctx.fillStyle = "#FF0000"
+    ctx.font = "30px Arial"
+    ctx.fillText("refresh to restart", canvas.width/75, canvas.height/24)
     player.draw()
     
     particles.forEach((particle, index) => {
