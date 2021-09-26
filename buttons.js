@@ -1,9 +1,17 @@
 
 
 const button1 = document.querySelector('#test1')
+const button2 = document.querySelector('#test2')
 const paragraph = document.querySelector("p")
+let x = new animatedText(beemoviescript, paragraph, 100)
+button2.onclick = function() {
 
-button1.onclick = function() {
-    const x = new animatedText("111111111111", button1, 100)
+    
+    x.play()
 }
-const y = new animatedText("they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching they are always watching ", paragraph, 100).play()
+button1.onclick = function() {
+
+    x.stop()
+}
+
+
