@@ -7,8 +7,8 @@ button {
     margin: 1rem;
     font-size: 1.2rem;
     color: white;
-    height: 4rem
-    width: 10rem
+    height: 4rem;
+    width: 10rem;
     
     
 }
@@ -22,10 +22,46 @@ button:active {
 
 
 
+input {
+    border: 0.3rem solid white;
+    background-color: whitesmoke;
+    color:black;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+}
+
+input:focus {
+    border: 0.3rem solid white;
+    background-color: black;
+    color:white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    width: 20rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+}
+
+.center {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    
+}
+
+p {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    padding: 2rem;
+    margin: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    
+}
 
 body {
     background-color: black;
-    font-family: 'Courier New', Courier, monospace;
-    color: white;
-    font-size: 1.2rem;
+    
 }
