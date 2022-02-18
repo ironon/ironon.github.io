@@ -1,11 +1,16 @@
 
 import CollisionBox from "./CollisionBox.js";
 import UpdateList from "./UpdateList.js";
-
+function toRadians(angle) {
+    return angle * (Math.PI / 180);
+  }
 export default class PhysicsParticle extends Phaser.Physics.Matter.Sprite {
     static preload(scene) {
         scene.load.atlas('particles', 'assets/images/particle/particles.png', 'assets/images/particle/particles_atlas.json')
+        scene.load.atlas('forcefields', 'assets/images/shield/forcefield.png', 'assets/images/shield/forcefield_atlas.json')
+    
     }
+    
    
     constructor(scene, x, y, angle, radius, texture, name, frame, damage, speed) {
         
@@ -25,11 +30,14 @@ export default class PhysicsParticle extends Phaser.Physics.Matter.Sprite {
         this.setAngle(angle)
         
         this.setScale(2, 2)
+        this.textureName = texture
         this.setTint(0xfff8f7, 0xfff8f7, 0xfff8f7, 0xfff8f7);
         let collisionBox = new CollisionBox("circle",x,y,radius,false,name)
         this.setExistingBody(collisionBox.compoundBody)
         //this.setFixedRotation();
-        this.setRotation(Math.random() * 2)
+        if (texture == "forcefields") { 
+            this.setRotation(toRadians(angle+90))
+        }
         this.setIgnoreGravity(true);
         this.lifetime = 0
         this.damg = damage
@@ -57,9 +65,7 @@ export default class PhysicsParticle extends Phaser.Physics.Matter.Sprite {
     }
     setAngle(angle) {
         
-        function  toRadians(angle) {
-            return angle * (Math.PI / 180);
-          }
+       
         let t_angle = toRadians(angle)
         
         this.aangle = angle
@@ -77,7 +83,9 @@ export default class PhysicsParticle extends Phaser.Physics.Matter.Sprite {
              this.setIgnoreGravity(true);
 
             this.setVelocity(this.direction.x, this.direction.y)
-            this.setAngularVelocity(Math.PI/((Math.random() * 16) + 8))
+            if (this.textureName != "forcefields") {
+            this.setAngularVelocity(Math.PI/((Math.random() * 16) + 8))    
+            }
             this.lifetime += 1
             
             if ((this.lifetime > 400) || (this.t_scene.cameras.main.worldView.contains(this.body.position.x, this.body.position.y) == false)) {

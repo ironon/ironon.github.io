@@ -8,8 +8,9 @@ const config = {
     parent: 'survival-game',
     scene: [MainScene],
     scale: {
-        zoom:2,
-        mode: Phaser.Scale.FIT
+        zoom: 2,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     physics: {
         default: 'matter',

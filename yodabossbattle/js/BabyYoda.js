@@ -36,7 +36,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         this.setScale(4, 4)
         this.attackFinished = true
         this.attackIndex = -1
-        this.attacks = [this.delay5s, this.wallAttack, this.wallAttack, this.wallAttack, this.wallAttack,this.jumpAttack,this.jumpAttack,this.jumpAttack]
+        this.attacks = [this.delay5s, this.jumpAttack, this.jumpAttack_f, this.jumpAttack_f, this.jumpAttack_f, this.wallAttack, this.wallAttack_f, this.jumpAttack, this.wallAttack,this.jumpAttack_f, this.wallAttack_f]
         groundpound = scene.sound.add('groundpound')
         chargeup = scene.sound.add('chargeup')
         darkfire = scene.sound.add('darkfire')
@@ -90,6 +90,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
     }
     static preload(scene) {
         scene.load.atlas('baby_yoda', 'assets/images/baby_yoda.png', 'assets/images/baby_yoda_atlas.json')
+        scene.load.atlas('forcefields', 'assets/images/shield/forcefields.png', 'assets/images/shield/forcefields_atlas.json')
         scene.load.animation('baby_yoda_anim', 'assets/images/baby_yoda_anim.json')
         scene.load.audio('groundpound', 'assets/audio/groundpound.mp3')
         scene.load.audio('chargeup', 'assets/audio/chargeup.wav')
@@ -124,6 +125,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         }, 5000);
     }
     jumpAttack() {
+        sprite.cooldown = 1
         sprite.setCollisionWithPlayers(false)
         sprite.attackFinished = false
         sprite.setAwake();
@@ -133,17 +135,29 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         
        // this.setToSleep();
     }
-    ground_pound(scene, yoda, spread, finishAttack, speed) {
+    jumpAttack_f() {
+        sprite.jumpAttack()
+        sprite.cooldown = 0.5
+    }
+    wallAttack_f() {
+        sprite.wallAttack(0.5)
+    }
+    ground_pound(scene, yoda, spread, finishAttack, speed, particles) {
         if (finishAttack == null) {
             finishAttack = true
         }
+        if(particles == null || particles == undefined) {
+            particles = "particles"
+           
+        }
+  
         if (spread == null) {
             spread = 25
         }
 
         yoda.setToSleep();
         let num = 0
-        let attackCooldown = 2 * 1000
+        let attackCooldown = 2 * 1000 * this.cooldown
         if (speed == null) {
             speed = 3
         }
@@ -151,19 +165,41 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         for (let i = -180 - randoffset; i < 360 - randoffset; i = i + num) {
             
             let ground_particles = ["sand_particle","grass_particle","grass_chunk","rock_particle"]
-            let entry = ground_particles[Math.ceil(Math.random() * 4)]
+            let force_particles = ["force", "force1", "force2"]
+            let entry
+            if (particles == "forcefields") {
+                entry = force_particles[Math.ceil(Math.random() * 3)]
+            } else {
+                entry = ground_particles[Math.ceil(Math.random() * 4)]
+            }
+            
             let radius = 5.5
             let damage = 0
-            if (entry == "grass_particle") {
-                radius = 3.5
-                damage = -7
-            } else if (entry == "rock_particle") {
-                radius = 7.4
-            } else if (entry == "sand_particle") {
-                radius = 11.5
-                damage = 5
+            if (particles == "forcefields") {
+                if (entry == "force") {
+                    radius = 3.5
+                    damage = -7
+                } else if (entry == "force1") {
+                    radius = 7.4
+                } else if (entry == "force2") {
+                    radius = 11.5
+                    damage = 5
+                }
+            } else {
+                if (entry == "grass_particle") {
+                    radius = 3.5
+                    damage = -7
+                } else if (entry == "rock_particle") {
+                    radius = 7.4
+                } else if (entry == "sand_particle") {
+                    radius = 11.5
+                    damage = 5
+                }
             }
-            let particle = new PhysicsParticle(scene, this.x, this.y+30, i, radius, 'particles', 'ground_pound_p', entry, damage, speed)
+           
+            
+           
+            let particle = new PhysicsParticle(scene, this.x, this.y+30, i, radius, particles, 'ground_pound_p', entry, damage, speed)
             num = Math.round(Math.random() * spread)
             sprite.setCollisionWithPlayers(true)
             
@@ -184,7 +220,10 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         let aangle = angle * Math.PI / 180
         return new Wall(sprite.scene, 'grass_walls', orginX + (distance * Math.cos(aangle)), orginY + (distance * Math.sin(aangle)),1,angle)
     }
-    wallAttack() {
+    wallAttack(cooldown) {
+        if (cooldown == null) {
+            cooldown = 1
+        }
         sprite.attackFinished = false
         chargeup.play()
         let closestPlayer = sprite.getClosestPlayer()
@@ -205,7 +244,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         let wall = sprite.placeWall(sprite.x, sprite.y, angle, 110)
         setTimeout(() => {
             darkfire.play()
-            sprite.ground_pound(sprite.scene,sprite,7,false, 2)
+            sprite.ground_pound(sprite.scene,sprite,7,false, 2, "forcefields")
         }, 1500);
         setTimeout(() => {
             wall.destroy()
@@ -213,7 +252,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         setTimeout(() => {
             sprite.attackFinished = true
             
-        }, 4500);
+        }, 4500 * cooldown);
     }
     getClosestPlayer() {
         return this.scene.player
@@ -239,13 +278,14 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
             }
             
             
-        }
         
+        this.attackFinished = false
         if ((this.attackFinished == true) && (this.attackIndex + 1 <= this.attacks.length - 1)) {
             
             this.attackIndex += 1
             this.attacks[this.attackIndex]();
             
+        }
         }
     }
 
