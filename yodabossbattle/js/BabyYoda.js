@@ -1,3 +1,4 @@
+import BossBar from "./BossBar.js";
 import MainScene from "./MainScene.js";
 import PhysicsParticle from "./PhysicsParticle.js";
 import PlayerList from "./PlayerList.js";
@@ -40,7 +41,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         groundpound = scene.sound.add('groundpound')
         chargeup = scene.sound.add('chargeup')
         darkfire = scene.sound.add('darkfire')
-
+        this.healthBar = new BossBar(this.scene,1000,1000,1,this,this.onDeath)
         this.i = 0
         const {Body, Bodies} = Phaser.Physics.Matter.Matter
         this.bossMobPlatform = new Phaser.Physics.Matter.Sprite(scene.matter.world, 250, 250,'baby_yoda','babyyoda_24')
@@ -102,6 +103,9 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
     }
     get y() {
         return this.body.position.y
+    }
+    onDeath() {
+        console.log("I hasth died")
     }
     setCollisionWithPlayers(bool) {
         if (bool == true) {
@@ -279,7 +283,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
             
             
         
-        this.attackFinished = false
+        
         if ((this.attackFinished == true) && (this.attackIndex + 1 <= this.attacks.length - 1)) {
             
             this.attackIndex += 1

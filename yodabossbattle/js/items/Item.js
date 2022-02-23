@@ -88,7 +88,10 @@ export default class Item extends Phaser.Physics.Matter.Sprite {
         this.player.equippedItem = this
         this.equipped = true
         this.setActive(true).setVisible(true)
-        this.setFixedRotation();      
+        this.setRotation( 120 * (Math.PI / 180))   
+        this.setAngularVelocity(0)
+        this.setFixedRotation();   
+        
     }
     playerPick(player) {
         
@@ -96,6 +99,7 @@ export default class Item extends Phaser.Physics.Matter.Sprite {
         this.setActive(false).setVisible(false)
         this.player = player
         player.inventory.push(this)
+        this.setFixedRotation();
     }
     goToPlayer() {
         
@@ -114,7 +118,7 @@ export default class Item extends Phaser.Physics.Matter.Sprite {
         });
     }
     update() {
-        if (this.equipped == true && this.itemForm == false) {
+        if (this.equipped == true && this.itemForm == false && this.player.IsDead != true) {
             this.goToPlayer()
         }
     }

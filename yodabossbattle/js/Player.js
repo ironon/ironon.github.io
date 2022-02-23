@@ -34,7 +34,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.setExistingBody(compoundBody)
         this.setFixedRotation();
         this.setIgnoreGravity(true);
-        this.healthBar = new HealthBar(this.scene,100,100,"red",1,this,this.onDeath)
+        this.healthBar = new HealthBar(this.scene,100,100,1,this,this.onDeath)
         PlayerList.push(this)
         // let testsprite = new Phaser.Physics.Matter.Sprite(scene.matter.world, 270, 270, "thief")
         // console.log(testsprite)
@@ -157,10 +157,22 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
           } else {
                 this.anims.play('idle', true)
           }
+          if (this.equippedItem) {
+            
+            this.equippedItem.setFixedRotation();   
+          }
+          
           if (this.velocity.x < -0.1) {
               this.flipX = true
+              if (this.equippedItem) {
+                this.equippedItem.setRotation( -140 * (Math.PI / 180))   
+              }
+              
           } else if (this.velocity.x > 0.1) {
               this.flipX = false
+              if (this.equippedItem) {
+                this.equippedItem.setRotation( 50 * (Math.PI / 180))   
+              }
           }
   
       }
