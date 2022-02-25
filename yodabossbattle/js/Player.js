@@ -5,6 +5,7 @@ import PhysicsParticle from "./PhysicsParticle.js";
 import Chat from "./Chat.js"
 import PlayerList from "./PlayerList.js";
 import Item from "./items/Item.js";
+import ScaleFactor from "./ScaleFactor.js";
 let sprite
 let cooldown = 0
 export default class Player extends Phaser.Physics.Matter.Sprite {
@@ -15,6 +16,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         this.scene = scene
         sprite = this
         this.inventory = []
+        this.setScale(1 * ScaleFactor, 1 * ScaleFactor)
         this.equippedItem = null
         this.health = 100
         this.touching = []

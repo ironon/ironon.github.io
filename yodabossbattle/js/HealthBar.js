@@ -1,4 +1,5 @@
 
+import ScaleFactor from "./ScaleFactor.js"
 import UpdateList from "./UpdateList.js"
 
 export default class HealthBar extends Phaser.GameObjects.Sprite {
@@ -17,7 +18,7 @@ export default class HealthBar extends Phaser.GameObjects.Sprite {
         this.hitCooldown = 0
         this.deathFunction = onDealth
         this.offsetY = 18
-        this.setScale(0.69, 0.69) //HAHAHHA FUNNY NUMBER OMBOMBOD ASDASDASD die
+        this.setScale(0.69 * ScaleFactor, 0.69 * ScaleFactor) //HAHAHHA FUNNY NUMBER OMBOMBOD ASDASDASD die
         this.scene.add.existing(this)
         UpdateList.push(this)
         

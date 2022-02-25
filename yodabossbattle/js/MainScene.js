@@ -5,6 +5,7 @@ import UpdateList from "./UpdateList.js";
 import LoadList from "./LoadList.js";
 import PlayerList from "./PlayerList.js";
 import IronSword from "./items/IronSword.js";
+import config from "./survival-game.js";
 
 
 
@@ -32,9 +33,14 @@ export default class MainScene extends Phaser.Scene {
         this.scale.displaySize.setAspectRatio(1);
         this.scale.refresh();
         const map = this.make.tilemap({key:'map'});
+        // map.setBaseTileSize(64, 64);
+        // map.setLayerTileSize(64, 64)
         const tileset = map.addTilesetImage('RPGNatureTileset','tiles',32,32,0,0);
-        const layer1 = map.createLayer('Tile Layer 1', tileset, 0, 0)
-        const layer2 = map.createLayer('Tile Layer 2', tileset, 0, 0)
+        let layer1 = map.createLayer('Tile Layer 1', tileset, 0, 0)
+        let layer2 = map.createLayer('Tile Layer 2', tileset, 0, 0)
+        layer1.setScale(2, 2)
+        layer2.setScale(2, 2)
+        
         const scene = this
         
         // this.scale.displaySize.setAspectRatio( window.innerWidth/window.innerHeight );
@@ -46,11 +52,11 @@ export default class MainScene extends Phaser.Scene {
             'mask': 4,
           };
         let music = this.sound.add('music')
-        music.play()
+       // music.play()
         this.matter.world.convertTilemapLayer(layer1)
-        this.player = new Player({scene:this, x:100, y:100, texture:'thief',frame:'thief_idle_1'})
+        this.player = new Player({scene:this, x:200, y:200, texture:'thief',frame:'thief_idle_1'})
         
-        this.bossMob = new BabyYoda({scene:this, x:260, y:206, texture:'baby_yoda',frame:'babyyoda_0'})
+        this.bossMob = new BabyYoda({scene:this, x:config.width / 1.9, y:config.height /  2.5, texture:'baby_yoda',frame:'babyyoda_0'})
         this.player.inputKeys = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
             down: Phaser.Input.Keyboard.KeyCodes.S,

@@ -1,8 +1,8 @@
 import MainScene from "./MainScene.js"
 
 const config = {
-    width: 512,
-    height: 512,
+    width: 1024,
+    height: 1024,
     backgroundColor: '#333333',
     type: Phaser.AUTO,
     parent: 'survival-game',
@@ -15,7 +15,7 @@ const config = {
     physics: {
         default: 'matter',
         matter: {
-            debug:false ,
+            debug:true ,
             gravity:{y:6.5},
         }
     },
@@ -31,3 +31,5 @@ const config = {
 }
     
 new Phaser.Game(config)
+
+export default config

@@ -1,5 +1,6 @@
 
 import CollisionBox from "./CollisionBox.js";
+import ScaleFactor from "./ScaleFactor.js";
 import UpdateList from "./UpdateList.js";
 function toRadians(angle) {
     return angle * (Math.PI / 180);
@@ -29,10 +30,10 @@ export default class PhysicsParticle extends Phaser.Physics.Matter.Sprite {
         }
         this.setAngle(angle)
         
-        this.setScale(2, 2)
+        this.setScale(2 * ScaleFactor, 2 * ScaleFactor)
         this.textureName = texture
         this.setTint(0xfff8f7, 0xfff8f7, 0xfff8f7, 0xfff8f7);
-        let collisionBox = new CollisionBox("circle",x,y,radius,false,name)
+        let collisionBox = new CollisionBox("circle",x,y,radius * ScaleFactor,false,name)
         this.setExistingBody(collisionBox.compoundBody)
         //this.setFixedRotation();
         if (texture == "forcefields") { 

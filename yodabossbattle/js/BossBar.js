@@ -1,4 +1,5 @@
 import HealthBar from "./HealthBar.js";
+import ScaleFactor from "./ScaleFactor.js";
 
 export default class BossBar extends HealthBar {
     constructor(scene,max,current,size,entity, onDeath) {
@@ -6,7 +7,7 @@ export default class BossBar extends HealthBar {
         this.bar = new Phaser.GameObjects.Graphics(scene);
         this.offsetY = 60
         this.offsetX = -10
-        this.setScale(2, 2)
+        this.setScale(2 * ScaleFactor, 2 * ScaleFactor)
         this.setHealth(100  )
         console.log(this)
     }

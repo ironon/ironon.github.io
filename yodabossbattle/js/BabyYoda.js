@@ -1,7 +1,10 @@
 import BossBar from "./BossBar.js";
+import Chat from "./Chat.js";
+import CollisionBox from "./CollisionBox.js";
 import MainScene from "./MainScene.js";
 import PhysicsParticle from "./PhysicsParticle.js";
 import PlayerList from "./PlayerList.js";
+import ScaleFactor from "./ScaleFactor.js";
 import Wall from "./Wall.js";
 
 let groundpound
@@ -34,7 +37,8 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         this.scene.add.existing(this);
         this.scene = scene
         this.emitter = null
-        this.setScale(4, 4)
+        this.setScale(4 * ScaleFactor, 4 * ScaleFactor)
+       
         this.attackFinished = true
         this.attackIndex = -1
         this.attacks = [this.delay5s, this.jumpAttack, this.jumpAttack_f, this.jumpAttack_f, this.jumpAttack_f, this.wallAttack, this.wallAttack_f, this.jumpAttack, this.wallAttack,this.jumpAttack_f, this.wallAttack_f]
@@ -45,7 +49,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         this.i = 0
         const {Body, Bodies} = Phaser.Physics.Matter.Matter
         this.bossMobPlatform = new Phaser.Physics.Matter.Sprite(scene.matter.world, 250, 250,'baby_yoda','babyyoda_24')
-        let body = Bodies.rectangle(260, 270, 100, 1, {isSensor:false,label:"yodaPlatform"});
+        let body = Bodies.rectangle(this.x, this.y + 100, 100, 1, {isSensor:false,label:"yodaPlatform"}); // The platform that yoda jumps on, so he doesnt fall out the map
         let compoundBody2 = Body.create({
             parts: [body],
             frictionAir: 0.35
@@ -59,10 +63,10 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         this.bossMobPlatform.setExistingBody(compoundBody2)
         this.bossMobPlatform.setFixedRotation();
         this.bossMobPlatform.setToSleep();
-        var yodaCol = Bodies.circle(this.x, this.y, 50, {isSensor:false,label:"yodaCol"});
-        var yodaSen = Bodies.circle(this.x, this.y, 60, {isSensor:true,label:"yodaSen"});
+        var yodaCol = new CollisionBox("circle",this.x,this.y,48 * ScaleFactor,false, "yodaCol")
+        var yodaSen = Bodies.circle(this.x, this.y, 48 * ScaleFactor * 1.2, {isSensor:true,label:"yodaSen"});
         this.compoundBody = Body.create({
-            parts: [yodaCol, yodaSen],
+            parts: [yodaCol.compoundBody, yodaSen],
             frictionAir: 0.1
         })
         this.compoundBody.collisionFilter = {

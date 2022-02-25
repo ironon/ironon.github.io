@@ -1,4 +1,5 @@
 import CollisionBox from "./CollisionBox.js"
+import ScaleFactor from "./ScaleFactor.js";
 function IsMultOf(num, multiple) {
     let factor = (num % multiple == 0)
     let mult = (multiple % num == 0)
@@ -37,6 +38,7 @@ export default class Wall extends Phaser.Physics.Matter.Sprite {
         if (Math.sign(angle) == -1) {
             angle = 360 + angle
         }
+        
         let roundedNum = roundToNearestMultipleOf(angle, 45)
         let width = 50
         let height = 20
@@ -57,6 +59,7 @@ export default class Wall extends Phaser.Physics.Matter.Sprite {
         } else if (typeof size == 'int') {
             this.size = {x:size, y:size}
         }
+        this.setScale(1 * ScaleFactor, 1 * ScaleFactor)
         this.wall_angle = angle
         this.collisionBox = new CollisionBox("rectangle",x,y,{width:width,height:height},false,'wallAttackWall',0.5)
         this.scene.add.existing(this)
