@@ -85,7 +85,7 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
         cooldown = (cooldown > 0) ? cooldown = cooldown - 1 : cooldown = cooldown
 
         this.anims.play('idle',true);
-        let speed = 2.5
+        let speed = Math.pow(2.5, 2)
         
         let scene = this.scene
         let playerVelocity = new Phaser.Math.Vector2();
@@ -103,9 +103,9 @@ export default class Player extends Phaser.Physics.Matter.Sprite {
               playerVelocity.y = 1
           }
           if(this.inputKeys.sprint.isDown) {
-              speed = 4
-          } else {
-              speed = 2.5
+              speed = Math.pow(3, 2.3)
+          } else {  
+              speed =  Math.pow(3, 2)
           }
           if(cooldown == 0) {
             if(this.inputKeys.inventory_left.isDown) {

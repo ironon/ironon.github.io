@@ -83,7 +83,7 @@ export default class PhysicsParticle extends Phaser.Physics.Matter.Sprite {
            // console.log(this.direction)
              this.setIgnoreGravity(true);
 
-            this.setVelocity(this.direction.x, this.direction.y)
+            this.setVelocity(this.direction.x * ScaleFactor, this.direction.y * ScaleFactor)
             if (this.textureName != "forcefields") {
             this.setAngularVelocity(Math.PI/((Math.random() * 16) + 8))    
             }

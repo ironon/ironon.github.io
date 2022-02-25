@@ -49,7 +49,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         this.i = 0
         const {Body, Bodies} = Phaser.Physics.Matter.Matter
         this.bossMobPlatform = new Phaser.Physics.Matter.Sprite(scene.matter.world, 250, 250,'baby_yoda','babyyoda_24')
-        let body = Bodies.rectangle(this.x, this.y + 100, 100, 1, {isSensor:false,label:"yodaPlatform"}); // The platform that yoda jumps on, so he doesnt fall out the map
+        let body = Bodies.rectangle(this.x, this.y + 100, 100, 10, {isSensor:false,label:"yodaPlatform"}); // The platform that yoda jumps on, so he doesnt fall out the map
         let compoundBody2 = Body.create({
             parts: [body],
             frictionAir: 0.35
@@ -84,8 +84,10 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
 
         //Old Event listener, which is inconsistant.
         scene.matter.world.on('collisionstart', function (event, thingA, thingB) {
-            if((thingB.label == "yodaSen" && thingA.label == "yodaPlatform") || (thingB.label == "yodaCol" && thingA.label == "yodaPlatform")) {
-               
+            console.log(thingB)
+            console.log(thingB.gameObject + "    " + thingA.label)
+            if(thingB.label == "yodaSen" && thingA.label == "yodaPlatform") {
+                console.log("touched")
                 scene.bossMob.ground_pound(scene, scene.bossMob)
             }
          })
@@ -137,7 +139,7 @@ export default class BabyYoda extends Phaser.Physics.Matter.Sprite {
         sprite.setCollisionWithPlayers(false)
         sprite.attackFinished = false
         sprite.setAwake();
-        sprite.setVelocityY(-70)
+        sprite.setVelocityY(-140)
         groundpound.play()
        
         
