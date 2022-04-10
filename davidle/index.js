@@ -29,7 +29,7 @@ let mobileCheck = function() {
   let word
   let newX
   let newY
-  if (mobileCheck() == true) {
+  if (mobileCheck() == false) {
      width = 0.05 * canvas.width //pixels
      color = 'rgb(255, 255, 255)'
      line_width = 0.0025 * canvas.width
