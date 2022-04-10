@@ -1,3 +1,5 @@
+const Keyboard = window.SimpleKeyboard.default;
+
 let canvas = document.getElementById("davidle")
 let ctx = canvas.getContext("2d")
 canvas.height = window.innerHeight
@@ -11,15 +13,15 @@ let gamestate = "playing"
 let attempts = 0
 //BOX PROPERTIES
 
-let width = 70 //pixels
+let width = 0.05 * canvas.width //pixels
 let color = 'rgb(255, 255, 255)'
-let line_width = 6
+let line_width = 0.0025 * canvas.width
 let yOffset = 60 //Just so i have room for title and stuff up top
-let letterLength = 50
-let textYOffset = 80
-let textSize = 40
-let xPadding = 14
-let yPadding = 2.2
+let letterLength = 0.03 * canvas.width
+let textYOffset = 0.07 * canvas.width
+let textSize = 0.005 * canvas.width
+let xPadding = 0.006 * canvas.width
+let yPadding = 0.001 * canvas.width
 let word = "DAVID"
 
 function floorToNearestMultipleOf(num, roundererderdsdasdds_enlgish_is_hard) { // Here at David Incorperation we only make the best of variable names.
@@ -54,11 +56,17 @@ function title() {
 function enter() {
     let enteredword = []
     for (i = 0; i < 5; i++) {
-        enteredword.push(Davidle.shift().key)
+        try {
+            enteredword.push(Davidle.shift().key) 
+        } catch {
+            console.log('user tried to enter <5 letter word and im too lazy to tell them')
+            return
+        }
+        
     }
     gradeRow(attempts, enteredword, newX, newY)
     attempts = attempts + 1
-    console.log(attempts)
+    
     if (attempts == 6) {
         gameOver()
     }
@@ -103,25 +111,28 @@ function diologBox(text) {
     let x = midX / 8
     let y = midY / 2
     ctx.fillStyle = "white"
-    ctx.fillRect(x, y, 400, 400)
+    ctx.fillRect(0.4 * canvas.width, 0.2 * canvas.width, 0.2 * canvas.width, 0.2 * canvas.width)
     ctx.fillStyle = "black"
     ctx.lineWidth = line_width
-    ctx.rect(x, y, 400, 400)
+    ctx.rect(0.4 * canvas.width, 0.2 * canvas.width, 0.2 * canvas.width, 0.2 * canvas.width)
     ctx.stroke()
     ctx.font = `20px Comic Sans MS`
     ctx.textAlign = "left"
-    ctx.fillText(text, x + (midX / 16), y + (midY / 3))
+    ctx.fillText(text, 0.42 * canvas.width, 0.3 * canvas.width)
 }
 function gameOver() {
+    gamestate = "gameover"
     diologBox("sucks 2 suck. refresh to restart")
 }
 function win() {
+    gamestate = "gameover"
     diologBox("HOW DID U GUESS THAT??? HAX")
 }
 let newX = midX - ((width + xPadding) * 5) / 2
 let newY = (midY - (width * 6) / 2) + yOffset
 function update() {
-    if (gamestate = "playing") {
+    if (gamestate == "playing") {
+       
         addGrid(newX, newY)
         title()
         
@@ -151,3 +162,26 @@ window.addEventListener("keydown", (event) => {
     }
    
 })
+
+const myKeyboard = new Keyboard({
+    onKeyPress: button => onKeyPress(button)
+  });
+
+    function onKeyPress(button) {
+    if (letters.includes(button)) {
+        if (Davidle.length % 5 != 0) {
+            Davidle.push({key:button})
+        } else {
+            if (Davidle.length == 0) {
+                Davidle.push({key:button})
+            }
+        }
+        
+    }
+    if (button == "{bksp}") {
+        Davidle.pop()
+    }
+    if (button == "{enter}") {
+        enter()
+    }
+  }
