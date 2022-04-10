@@ -27,29 +27,36 @@ let mobileCheck = function() {
   let xPadding
   let yPadding
   let word
+  let newX
+  let newY
   if (mobileCheck() == false) {
      width = 0.05 * canvas.width //pixels
      color = 'rgb(255, 255, 255)'
      line_width = 0.0025 * canvas.width
-     yOffset = 60 //Just so i have room for title and stuff up top
+     yOffset = 0.03 * canvas.width //Just so i have room for title and stuff up top
      letterLength = 0.03 * canvas.width
      textYOffset = 0.09 * canvas.width
      textSize = 0.005 * canvas.width
      xPadding = 0.006 * canvas.width
      yPadding = 0.001 * canvas.width
+     newX = midX - ((width + xPadding) * 5) / 2
+     newY = (midY - (width * 6) / 2) + yOffset
      word = "DAVID"
      
   } else {
       //Player is on mobile
+    canvas.height = window.innerHeight * 31/40
      width = 0.085 * canvas.height //pixels
      color = 'rgb(255, 255, 255)'
      line_width = 0.0025 * canvas.height
      yOffset = 0.03 * canvas.width
      letterLength = 0.06 * canvas.height
-     textYOffset = 0.04 * canvas.height
+     textYOffset = 0.16 * canvas.height
      textSize = 0.005 * canvas.height
      xPadding = 0.006 * canvas.height
      yPadding = 0.001 * canvas.height
+     newX = midX - ((width + xPadding) * 5) / 2
+     newY = (midY - (width * 10) / 2) + yOffset
      word = "DAVID"
 
      const myKeyboard = new Keyboard({
@@ -183,11 +190,10 @@ function win() {
     gamestate = "gameover"
     diologBox("HOW DID U GUESS THAT??? HAX")
 }
-let newX = midX - ((width + xPadding) * 5) / 2
-let newY = (midY - (width * 6) / 2) + yOffset
+
 function update() {
     if (gamestate == "playing") {
-       
+        console.log(newX, newY)
         addGrid(newX, newY)
         title()
         
