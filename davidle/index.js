@@ -33,23 +33,47 @@ let mobileCheck = function() {
      line_width = 0.0025 * canvas.width
      yOffset = 60 //Just so i have room for title and stuff up top
      letterLength = 0.03 * canvas.width
-     textYOffset = 0.07 * canvas.width
+     textYOffset = 0.09 * canvas.width
      textSize = 0.005 * canvas.width
      xPadding = 0.006 * canvas.width
      yPadding = 0.001 * canvas.width
      word = "DAVID"
+     
   } else {
       //Player is on mobile
      width = 0.085 * canvas.height //pixels
      color = 'rgb(255, 255, 255)'
      line_width = 0.0025 * canvas.height
-     yOffset = 60 //Just so i have room for title and stuff up top
+     yOffset = 0.03 * canvas.width
      letterLength = 0.06 * canvas.height
-     textYOffset = 0.07 * canvas.height
+     textYOffset = 0.04 * canvas.height
      textSize = 0.005 * canvas.height
      xPadding = 0.006 * canvas.height
      yPadding = 0.001 * canvas.height
      word = "DAVID"
+
+     const myKeyboard = new Keyboard({
+        onKeyPress: button => onKeyPress(button)
+      });
+    
+        function onKeyPress(button) {
+        if (letters.includes(button)) {
+            if (Davidle.length % 5 != 0) {
+                Davidle.push({key:button})
+            } else {
+                if (Davidle.length == 0) {
+                    Davidle.push({key:button})
+                }
+            }
+            
+        }
+        if (button == "{bksp}") {
+            Davidle.pop()
+        }
+        if (button == "{enter}") {
+            enter()
+        }
+      }
   }
 //BOX PROPERTIES
 
@@ -194,25 +218,3 @@ window.addEventListener("keydown", (event) => {
    
 })
 
-const myKeyboard = new Keyboard({
-    onKeyPress: button => onKeyPress(button)
-  });
-
-    function onKeyPress(button) {
-    if (letters.includes(button)) {
-        if (Davidle.length % 5 != 0) {
-            Davidle.push({key:button})
-        } else {
-            if (Davidle.length == 0) {
-                Davidle.push({key:button})
-            }
-        }
-        
-    }
-    if (button == "{bksp}") {
-        Davidle.pop()
-    }
-    if (button == "{enter}") {
-        enter()
-    }
-  }
