@@ -26,7 +26,7 @@ let mobileCheck = function() {
   let textSize
   let xPadding
   let yPadding
-  let word
+  let word = "ETHAN"
   let newX
   let newY
   if (mobileCheck() == false) {
@@ -41,7 +41,7 @@ let mobileCheck = function() {
      yPadding = 0.001 * canvas.width
      newX = midX - ((width + xPadding) * 5) / 2
      newY = (midY - (width * 6) / 2) + yOffset
-     word = "DAVID"
+    
      
   } else {
       //Player is on mobile
@@ -57,7 +57,7 @@ let mobileCheck = function() {
      yPadding = 0.001 * canvas.height
      newX = midX - ((width + xPadding) * 5) / 2
      newY = (midY - (width * 10) / 2) + yOffset
-     word = "DAVID"
+     
 
      const myKeyboard = new Keyboard({
         onKeyPress: button => onKeyPress(button)
