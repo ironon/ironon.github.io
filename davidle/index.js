@@ -29,7 +29,7 @@ let mobileCheck = function() {
   let word
   let newX
   let newY
-  if (mobileCheck() == false) {
+  if (mobileCheck() == true) {
      width = 0.05 * canvas.width //pixels
      color = 'rgb(255, 255, 255)'
      line_width = 0.0025 * canvas.width
@@ -45,7 +45,7 @@ let mobileCheck = function() {
      
   } else {
       //Player is on mobile
-    canvas.height = window.innerHeight * 31/40
+    canvas.height = window.innerHeight * 29/40
      width = 0.085 * canvas.height //pixels
      color = 'rgb(255, 255, 255)'
      line_width = 0.0025 * canvas.height
