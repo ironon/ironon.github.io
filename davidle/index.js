@@ -9,6 +9,9 @@ let midY = canvas.height / 2
 let letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 // Yes i know thats a terrible way for letter detection but I DIDNT ASK FOR YOUR OPINI-
 let Davidle = []
+let wordList = ["NERDS", "JACOB", "CRAFT", "SWARM", "ECHAN", "SUSSY", "BAKAS", "IWILL", "ENDYU", "HELPP", "AMONG", "NOOBS"]
+let timeSince13thofApril = Math.abs(Math.floor((1.6494013e+12 - Date.now()) / 468000000)) - 2 //Dont ask why -2 is there, idk either
+
 let gamestate = "playing"
 let attempts = 0
 let mobileCheck = function() {
@@ -26,7 +29,8 @@ let mobileCheck = function() {
   let textSize
   let xPadding
   let yPadding
-  let word = "ETHAN"
+
+  let word = wordList[timeSince13thofApril]
   let newX
   let newY
   if (mobileCheck() == false) {
