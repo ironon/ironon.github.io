@@ -144,7 +144,8 @@ function enter() {
         }
         
     }
-    if (WORDS.includes(enteredword.join(''))) {
+    
+    if (WORDS.includes(enteredword.join('')) || wordList.includes(enteredword.join('').toUpperCase())) {
         gradeRow(attempts, enteredword, newX, newY)
         attempts = attempts + 1
         if (attempts == 6) {
@@ -206,11 +207,11 @@ function diologBox(text) {
 }
 function gameOver() {
     gamestate = "gameover"
-    diologBox("sucks 2 suck. refresh to restart")
+    alert("sucks 2 suck. refresh to restart")
 }
 function win() {
     gamestate = "gameover"
-    diologBox("HOW DID U GUESS THAT??? HAX")
+    alert("HOW DID U GUESS THAT??? HAX")
 }
 
 function update() {
