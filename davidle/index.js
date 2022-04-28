@@ -1,6 +1,6 @@
 const Keyboard = window.SimpleKeyboard.default;
 import { WORDS } from "./words.js";
-
+import {customWords} from "./customwords.js";	
 let canvas = document.getElementById("davidle")
 let ctx = canvas.getContext("2d")
 canvas.height = window.innerHeight
@@ -11,6 +11,40 @@ let letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
 // Yes i know thats a terrible way for letter detection but I DIDNT ASK FOR YOUR OPINI-
 let Davidle = []
 let wordList = ["DREAM", "JUBBY", "DAYID", "DIRBY", "TRACK", "ECHAN", "SIEGE", "VALOR", "MINCE", "CRAFT", "TUSKY", "LBOZO", "COPEE", "HEELP", "GRANT", "JJESS", "ENDDD"]
+
+function setCookie(cname, cvalue, exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+  
+  function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+  
+  function checkCookie() {
+    let user = getCookie("username");
+    if (user != "") {
+      alert("Welcome again " + user);
+    } else {
+      user = prompt("Please enter your name:", "");
+      if (user != "" && user != null) {
+        setCookie("username", user, 365);
+      }
+    }
+  }
 
 let gamestate = "playing"
 let attempts = 0
@@ -24,9 +58,21 @@ let mobileCheck = function() {
   
   var Difference_In_Time = Date.now() - date1.getTime();
   var ftime = Math.floor(Difference_In_Time / (1000 * 3600 * 24))
-  
+  console.log(getCookie("cheater"))
+if (getCookie("cheater") == "true") {
+    trapped()
+}
 
-
+function trapped(original) {
+    
+    gamestate="trapped"
+    alert("you fell for my trap card bozo. next maybe time dont cheat.")
+    if (original == true) {
+        setCookie("cheater", "true", 1)
+    }
+    window.location = 'about:blank';
+    
+}
 
   let width
   let color
@@ -39,11 +85,12 @@ let mobileCheck = function() {
   let yPadding
 
   let word = wordList[ftime]
+  let trappedWord = WORDS[Math.floor(Math.random() * wordList.length)]
   let newX
   let newY
   console.log("======================================================")
   console.log("You decided to be a little nerd, didn't you?")
-  console.error("The word today is " + word + ".")
+  console.error("The word today is " + trappedWord + ".")
   console.log("I'm more disapointed in you than ur parents, and thats saying somthing.")
   console.log("======================================================")
   if (mobileCheck() == false) {
@@ -144,8 +191,13 @@ function enter() {
         }
         
     }
+  
+    if (trappedWord.toLowerCase() == enteredword.join('').toLowerCase()) {
+        console.log("ez bozo")
+        trapped(true)
+    }
     
-    if (WORDS.includes(enteredword.join('')) || wordList.includes(enteredword.join('').toUpperCase())) {
+    if (WORDS.includes(enteredword.join('').toLowerCase()) || wordList.includes(enteredword.join('').toUpperCase()) || customWords.includes(enteredword.join('').toUpperCase())) {
         gradeRow(attempts, enteredword, newX, newY)
         attempts = attempts + 1
         if (attempts == 6) {

@@ -1,0 +1,10 @@
+{
+  "name": "Davidlingo",
+  "description": "the best thing to ever happen",
+  "version": "1.0",
+  "manifest_version": 3,
+  "background": {
+    "service_worker":"background.js"
+  },
+  "permissions": ["storage"]
+}

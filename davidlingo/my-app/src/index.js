@@ -2,8 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-console.log(document.cookie)
-const DATA = []
+function getCookie(cname) {
+  let name = cname + "=";
+  let decodedCookie = decodeURIComponent(document.cookie);
+  let ca = decodedCookie.split(';');
+  for(let i = 0; i <ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+let DATA
+if (getCookie("tasks") == "") {
+  DATA = []
+} else {
+  DATA = JSON.parse(getCookie("tasks"))
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

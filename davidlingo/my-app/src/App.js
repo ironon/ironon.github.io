@@ -2,8 +2,15 @@
 import Form from "./components/Form";
 import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import {nanoid} from "nanoid";
+
+function setCookie(cname, cvalue, exdays) {
+  const d = new Date();
+  d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  let expires = "expires="+ d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 
 
 const useUnload = fn => {
@@ -21,6 +28,8 @@ const useUnload = fn => {
 function App(props) {
   
   const [tasks, setTasks] = useState(props.tasks);
+  const dataRef = useRef()
+  dataRef.current = tasks
   function toggleTaskCompleted(id) {
     
     const updatedTasks = tasks.map(task => {
@@ -30,11 +39,7 @@ function App(props) {
       return task;
     })
   }
-  function getTask() {
-    console.log(tasks.length)
-    return tasks
-    
-  }
+
   function deleteTask(id) {
     console.log(id)
     const remainingTasks = tasks.filter(task => task.id !== id);
@@ -56,8 +61,7 @@ function App(props) {
   let g = useUnload(e => {
     e.preventDefault();
     
-    document.cookie = "tasks=" + getTask();
-    
+    setCookie("tasks", JSON.stringify(dataRef.current), 1000)
     
     
   });
