@@ -90,7 +90,7 @@ function trapped(original) {
   let newY
   console.log("======================================================")
   console.log("You decided to be a little nerd, didn't you?")
-  console.error("The word today is " + trappedWord + ".")
+  console.error("The word today is " + trappedWord.toUpperCase() + ".")
   console.log("I'm more disapointed in you than ur parents, and thats saying somthing.")
   console.log("======================================================")
   if (mobileCheck() == false) {
