@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+
+
+
+
 function getCookie(cname) {
   let name = cname + "=";
   let decodedCookie = decodeURIComponent(document.cookie);
@@ -19,17 +23,26 @@ function getCookie(cname) {
   return "";
 }
 let DATA
+let homeWork
 if (getCookie("tasks") == "") {
   DATA = []
 } else {
   DATA = JSON.parse(getCookie("tasks"))
+  
 }
+if (getCookie("homework") == "") {
+  homeWork = []
+} else {
+  homeWork = JSON.parse(getCookie("homework"))
+  
+}
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App tasks={DATA}/>
+    <App tasks={DATA} homework={homeWork}/>
   </React.StrictMode>
 );
 

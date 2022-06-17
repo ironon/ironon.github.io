@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-export default function Todo(props) {
+export default function Homework(props) {
     const [newName, setNewName] = useState("");
     const [newDesc, setNewDesc] = useState("");
     const [isEditing, setEditing] = useState(false);
@@ -19,19 +19,20 @@ export default function Todo(props) {
     }
     const editingTemplate = (
         <form className="stack-small" onSubmit={handleSubmit}>
+           
           <div className="form-group">
-            <label className="todo-label" htmlFor={props.id}>
+            <label className="homework-label" htmlFor={props.id}>
               New name for {props.task}
             </label>
-            <input id={props.id} className="todo-text" type="text" value={newName} onChange={handleChange}/>
-            <input id={props.descId} className="todo-text" type="text" value={newDesc} onChange={handleChangeDesc}/>
+            <input id={props.id} className="homework-text" type="text" value={newName} onChange={handleChange}/>
+            <input id={props.descId} className="homework-text" type="text" value={newDesc} onChange={handleChangeDesc}/>
           </div>
           <div className="btn-group">
-            <button type="button" className="btn todo-cancel" onClick={() => setEditing(false)}>
+            <button type="button" className="btn homework-cancel" onClick={() => setEditing(false)}>
               Cancel 
               <span className="visually-hidden"> renaming {props.task}</span>
             </button>
-            <button type="submit" className="btn btn__primary todo-edit">
+            <button type="submit" className="btn btn__primary homework-edit">
               Save 
               <span className="visually-hidden"> new name for {props.task}</span>
             </button>
@@ -47,7 +48,7 @@ export default function Todo(props) {
                 defaultChecked={props.completed}
                 onChange={() => props.toggleTaskCompleted(props.id)}
               />
-              <label className="todo-label" htmlFor={props.id}>
+              <label className="homework-label" htmlFor={props.id}>
                 {props.task}
               </label>
             </div>
@@ -68,7 +69,7 @@ export default function Todo(props) {
             </div>
         </div>
       );
-    return <li className="todo">{isEditing ? editingTemplate : viewTemplate}</li>;
+    return <li className="homework">{isEditing ? editingTemplate : viewTemplate}</li>;
 
     
   }
