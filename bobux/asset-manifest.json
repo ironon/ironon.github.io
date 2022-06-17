@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/bobuxgenerator/static/css/main.7f7eaa09.css",
+    "main.js": "/bobuxgenerator/static/js/main.735c4ffe.js",
+    "static/media/garfgarf.png": "/bobuxgenerator/static/media/garfgarf.25db2c73ede036a1dff6.png",
+    "static/media/communism.png": "/bobuxgenerator/static/media/communism.a8daf6d748869d5b562a.png",
+    "static/media/generator.png": "/bobuxgenerator/static/media/generator.b4096f76854b7b47f884.png",
+    "static/media/daydayHarvester.png": "/bobuxgenerator/static/media/daydayHarvester.9843922e1c091eefb0ce.png",
+    "static/media/snailworship.png": "/bobuxgenerator/static/media/snailworship.df437811fbba8cf7199c.png",
+    "static/media/bobuxmine.png": "/bobuxgenerator/static/media/bobuxmine.89f9ecbc54515678872b.png",
+    "static/media/dayday.png": "/bobuxgenerator/static/media/dayday.be2740ef4ebdb9adeb53.png",
+    "static/media/skyblock.png": "/bobuxgenerator/static/media/skyblock.b504833610251a2e0ff9.png",
+    "static/media/noodlebird.png": "/bobuxgenerator/static/media/noodlebird.538c2047dbde0f3cbc54.png",
+    "static/media/jess.png": "/bobuxgenerator/static/media/jess.fc345bbca667cb79f529.png",
+    "static/media/capitalism.png": "/bobuxgenerator/static/media/capitalism.050adb4b1e1caab435d8.png",
+    "static/media/laboratory.png": "/bobuxgenerator/static/media/laboratory.c6f1832b294859b5a23f.png",
+    "index.html": "/bobuxgenerator/index.html",
+    "main.7f7eaa09.css.map": "/bobuxgenerator/static/css/main.7f7eaa09.css.map",
+    "main.735c4ffe.js.map": "/bobuxgenerator/static/js/main.735c4ffe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f7eaa09.css",
+    "static/js/main.735c4ffe.js"
+  ]
+}
