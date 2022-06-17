@@ -1,0 +1,31 @@
+button {
+    border: 0.2rem solid white;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: black;
+    padding: 2rem;
+    box-shadow: 0.55rem -0.3rem white   ;
+    margin: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    height: 4rem;
+    width: 10rem;
+    
+    
+}
+
+
+button:active {
+    transform: translate(0.75rem, -0.4rem);
+    box-shadow: 0rem 0rem white   ;
+    
+}
+
+
+
+
+body {
+    background-color: black;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+    font-size: 1.2rem;
+}

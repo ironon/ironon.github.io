@@ -1,0 +1,26 @@
+{
+  "name": "Davidlingo",
+  "description": "the best thing to ever happen",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action" : {
+    "default_icon": {
+      "16": "devid16.png",
+      "32": "devid32.png",
+      "48": "devid48.png",
+      "128": "devid128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Davidlingo"
+  },
+  "icons": {
+    "16": "devid16.png",
+    "32": "devid32.png",
+    "48": "devid48.png",
+    "128": "devid128.png"
+  },
+  "background": {
+    "service_worker":"background.js"
+  },
+  "permissions": ["storage", "notifications", "alarms"]
+}
