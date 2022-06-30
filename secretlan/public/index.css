@@ -1,0 +1,53 @@
+#landiv {
+    border: 0.1rem solid black;
+    border-radius: 0.5ch;
+    
+    min-width: 70ch;
+    min-height: 40vh;
+    margin: 2vh;
+    text-align: left;
+    vertical-align: top;
+    
+}
+#landivv {
+    border: 0.1rem solid black;
+    border-radius: 0.5ch;
+    overflow-x: scroll;
+    min-width: 70ch;
+    min-height: 40vh;
+    margin: 2vh;
+    margin-top: 4vh;
+    text-align: left;
+    vertical-align: top;
+    
+}
+img {
+    max-width: 5ch;
+    max-height: 5ch;
+}
+h1 {
+    width: 100%;
+    text-align: center;
+}
+h3 {
+    width: 100%;
+    text-align: center;
+}
+h4 {
+    width: 100%;
+    margin-top: 0ch;
+    text-align: center;
+}
+.App-header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+#translater {
+    padding-top: 10vh;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
