@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/static/css/main.221cd52f.css",
-    "main.js": "/static/js/main.ba1c941e.js",
+    "main.js": "/static/js/main.914bcaac.js",
     "static/media/baboon.jpg": "/static/media/baboon.b4aa7231a1f98ba4fd1e.jpg",
     "static/media/schoolonfire.png": "/static/media/schoolonfire.6eaf6eb9634dd28962a8.png",
     "static/media/tuskylogo.png": "/static/media/tuskylogo.0fe101f2a08cd17f591a.png",
     "index.html": "/index.html",
     "main.221cd52f.css.map": "/static/css/main.221cd52f.css.map",
-    "main.ba1c941e.js.map": "/static/js/main.ba1c941e.js.map"
+    "main.914bcaac.js.map": "/static/js/main.914bcaac.js.map"
   },
   "entrypoints": [
     "static/css/main.221cd52f.css",
-    "static/js/main.ba1c941e.js"
+    "static/js/main.914bcaac.js"
   ]
 }
